@@ -2,7 +2,7 @@ import Image from 'next/image';
 
 export default function ProductCard({ product }: { product: any }) {
   return (
-    <div className="bg-white rounded-xl shadow p-4 w-full h-full flex flex-col items-center">
+    <div className="bg-white rounded-xl shadow p-4 w-full h-full flex flex-col items-center transition transform hover:scale-105 hover:shadow-lg duration-300">
       <div className="relative w-full h-48 mb-2">
         <Image
           src={product.image}
