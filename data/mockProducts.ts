@@ -6,7 +6,7 @@ const mockProducts = [
     platform: "PS5",
     category: "Aksiyon",
     language: "Türkçe",
-    image: "https://via.placeholder.com/300x400",
+    image: "/images/godofwar.png",  // <== Burada localhost içinden path
   },
   {
     id: 2,
@@ -15,8 +15,6 @@ const mockProducts = [
     platform: "PC",
     category: "RPG",
     language: "İngilizce",
-    image: "https://via.placeholder.com/300x400",
+    image: "/images/elden-ring.jpg",
   },
 ];
-
-export default mockProducts;
