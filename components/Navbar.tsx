@@ -1,4 +1,3 @@
-// components/Navbar.tsx
 import Link from 'next/link';
 import { useState } from 'react';
 import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
@@ -19,10 +18,12 @@ export default function Navbar() {
         <Link href="/about" className="hover:text-yellow-400 transition">Hakkımızda</Link>
         <Link href="/contact" className="hover:text-yellow-400 transition">İletişim</Link>
 
-        {/* Clerk kullanıcı durumu */}
+        {/* Favoriler linki sadece giriş yapmış kullanıcıya */}
         <SignedIn>
+          <Link href="/favorites" className="hover:text-yellow-400 transition">Favoriler</Link>
           <UserButton afterSignOutUrl="/" />
         </SignedIn>
+
         <SignedOut>
           <Link href="/sign-in" className="hover:text-yellow-400 transition">Giriş Yap</Link>
         </SignedOut>
@@ -52,10 +53,12 @@ export default function Navbar() {
           <Link href="/about" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Hakkımızda</Link>
           <Link href="/contact" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>İletişim</Link>
 
-          {/* Mobilde kullanıcı durumu */}
+          {/* Favoriler linki mobilde */}
           <SignedIn>
+            <Link href="/favorites" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Favoriler</Link>
             <UserButton afterSignOutUrl="/" />
           </SignedIn>
+
           <SignedOut>
             <Link href="/sign-in" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Giriş Yap</Link>
           </SignedOut>
