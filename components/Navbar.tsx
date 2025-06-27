@@ -1,22 +1,31 @@
 // components/Navbar.tsx
 import Link from 'next/link';
 import { useState } from 'react';
+import { SignedIn, SignedOut, UserButton } from '@clerk/nextjs';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
+    <nav className="bg-gray-900 text-white px-6 py-4 flex items-center justify-between relative">
       <Link href="/" className="flex items-center space-x-2 text-2xl font-bold hover:text-yellow-400 transition">
         <img src="/logo.png" alt="Logo" className="w-8 h-8" />
         <span>Oyun Kutusu</span>
       </Link>
 
       {/* Masaüstü menü */}
-      <div className="hidden md:flex space-x-8">
+      <div className="hidden md:flex items-center space-x-8">
         <Link href="/" className="hover:text-yellow-400 transition">Ana Sayfa</Link>
         <Link href="/about" className="hover:text-yellow-400 transition">Hakkımızda</Link>
         <Link href="/contact" className="hover:text-yellow-400 transition">İletişim</Link>
+
+        {/* Clerk kullanıcı durumu */}
+        <SignedIn>
+          <UserButton afterSignOutUrl="/" />
+        </SignedIn>
+        <SignedOut>
+          <Link href="/sign-in" className="hover:text-yellow-400 transition">Giriş Yap</Link>
+        </SignedOut>
       </div>
 
       {/* Mobil menü butonu */}
@@ -42,6 +51,14 @@ export default function Navbar() {
           <Link href="/" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Ana Sayfa</Link>
           <Link href="/about" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Hakkımızda</Link>
           <Link href="/contact" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>İletişim</Link>
+
+          {/* Mobilde kullanıcı durumu */}
+          <SignedIn>
+            <UserButton afterSignOutUrl="/" />
+          </SignedIn>
+          <SignedOut>
+            <Link href="/sign-in" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Giriş Yap</Link>
+          </SignedOut>
         </div>
       )}
     </nav>

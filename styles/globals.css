@@ -2,6 +2,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer theme, base, clerk, components, utilities;
+
 
 /* globals.css dosyasına ekle */
 
