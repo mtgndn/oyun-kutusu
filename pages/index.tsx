@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Head from 'next/head'; // Head bileşeni eklendi
 import ProductCard from '../components/ProductCard';
 import FilterSidebar from '../components/FilterSidebar';
 import Navbar from '../components/Navbar';
@@ -24,12 +25,17 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Favicon ve sayfa başlığı */}
+      <Head>
+        <title>Oyun Kutusu</title>
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <Navbar />
 
       <div className="text-black min-h-screen bg-gray-100 p-4">
-        <h1 className="text-black text-3xl font-bold mb-6">🎮 Oyun Kutusu</h1>
+        <h1 className="text-black text-3xl font-bold mb-6">Oyun Filtreleme</h1>
 
-        {/* FLEX düzen: solda filtre, sağda ürünler */}
         <div className="flex flex-col lg:flex-row gap-6">
           {/* Sol: Filtre Paneli */}
           <div className="text-black lg:w-1/4 w-full">

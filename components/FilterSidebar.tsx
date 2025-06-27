@@ -1,3 +1,5 @@
+import '../styles/globals.css';
+
 export default function FilterSidebar({ filters, setFilters }) {
   return (
     <aside className="bg-white p-4 rounded-xl shadow w-full max-w-xs">

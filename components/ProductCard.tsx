@@ -1,21 +1,20 @@
 import Image from 'next/image';
+import '../styles/globals.css';
 
-export default function ProductCard({ product }: { product: any }) {
+export default function ProductCard({ product }) {
   return (
-    <div className="bg-white rounded-xl shadow p-4 w-full h-full flex flex-col items-center transition transform hover:scale-105 hover:shadow-lg duration-300">
-      <div className="relative w-full h-48 mb-2">
-        <Image
-          src={product.image}
-          alt={product.title}
-          layout="fill"
-          objectFit="cover"
-          className="rounded-lg"
-          priority={true}
-        />
+    <div className="bg-white rounded-xl shadow-md overflow-hidden transform transition hover:scale-105 hover:shadow-lg">
+      <img
+        src={product.image}
+        alt={product.title}
+        className="w-full h-48 object-cover"
+      />
+      <div className="p-4">
+        <h2 className="text-lg font-semibold">{product.title}</h2>
+        <p className="text-sm text-gray-600">{product.platform} • {product.language}</p>
+        <p className="mt-2 font-bold text-blue-600">{product.price}₺</p>
       </div>
-      <h3 className="text-lg font-semibold text-center">{product.title}</h3>
-      <p className="text-gray-500 text-center">{product.platform} • {product.language}</p>
-      <p className="text-blue-600 font-bold mt-2 text-center">{product.price}₺</p>
     </div>
   );
 }
+
