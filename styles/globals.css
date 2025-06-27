@@ -3,6 +3,52 @@
 @tailwind components;
 @tailwind utilities;
 
+/* globals.css dosyasına ekle */
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animated-gradient-bg {
+  background: linear-gradient(-45deg, #6b46c1, #d53f8c, #ed64a6, #f6ad55);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  transition: background 0.5s ease;
+}
+
+@keyframes waveMove {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 1000px;
+  }
+}
+
+.wave-bg {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 200%;
+  height: 150px;
+  background: url('/wave.svg') repeat-x;
+  background-size: contain;
+  animation: waveMove 12s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+
 
 :root {
   --background: #ffffff;

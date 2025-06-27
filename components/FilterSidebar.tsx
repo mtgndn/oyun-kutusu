@@ -1,54 +1,92 @@
 import '../styles/globals.css';
+// components/FilterSidebar.tsx
+import React from 'react';
 
 export default function FilterSidebar({ filters, setFilters }) {
+  const handleChange = (e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
+    setFilters(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
+  };
+
   return (
-    <aside className="bg-white p-4 rounded-xl shadow w-full max-w-xs">
-      <h2 className="text-xl font-bold mb-4">Filtrele</h2>
-      <div className="mb-4">
-        <label className="block font-medium">Kategori</label>
+    <div className="bg-white p-6 rounded-xl shadow-md space-y-5">
+      <h2 className="text-xl font-semibold text-gray-800">Filtrele</h2>
+
+      {/* Kategori */}
+      <div>
+        <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Kategori</label>
         <select
+          name="category"
+          id="category"
           value={filters.category}
-          onChange={e => setFilters({ ...filters, category: e.target.value })}
-          className="w-full border p-2 rounded"
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-md px-3 py-2"
         >
-          <option value="">Tümü</option>
+          <option value="">Hepsi</option>
           <option value="Aksiyon">Aksiyon</option>
           <option value="RPG">RPG</option>
+          <option value="Spor">Spor</option>
           <option value="Yarış">Yarış</option>
+          <option value="Macera">Macera</option>
         </select>
       </div>
-      <div className="mb-4">
-        <label className="block font-medium">Platform</label>
-        <div className="space-y-1">
-          <label>
-            <input
-              type="radio"
-              name="platform"
-              value=""
-              checked={filters.platform === ''}
-              onChange={() => setFilters({ ...filters, platform: '' })}
-            /> Tümü
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="platform"
-              value="PS5"
-              checked={filters.platform === 'PS5'}
-              onChange={e => setFilters({ ...filters, platform: e.target.value })}
-            /> PS5
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="platform"
-              value="PC"
-              checked={filters.platform === 'PC'}
-              onChange={e => setFilters({ ...filters, platform: e.target.value })}
-            /> PC
-          </label>
+
+      {/* Platform */}
+      <div>
+        <label htmlFor="platform" className="block text-sm font-medium text-gray-700 mb-1">Platform</label>
+        <select
+          name="platform"
+          id="platform"
+          value={filters.platform}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-md px-3 py-2"
+        >
+          <option value="">Hepsi</option>
+          <option value="PC">PC</option>
+          <option value="PS5">PS5</option>
+        </select>
+      </div>
+
+      {/* Dil */}
+      <div>
+        <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-1">Dil</label>
+        <select
+          name="language"
+          id="language"
+          value={filters.language || ''}
+          onChange={handleChange}
+          className="w-full border border-gray-300 rounded-md px-3 py-2"
+        >
+          <option value="">Hepsi</option>
+          <option value="Türkçe">Türkçe</option>
+          <option value="İngilizce">İngilizce</option>
+        </select>
+      </div>
+
+      {/* Fiyat Aralığı */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-1">Fiyat Aralığı (₺)</label>
+        <div className="flex gap-2">
+          <input
+            type="number"
+            name="minPrice"
+            placeholder="Min"
+            value={filters.minPrice || ''}
+            onChange={handleChange}
+            className="w-1/2 border border-gray-300 rounded-md px-3 py-2"
+          />
+          <input
+            type="number"
+            name="maxPrice"
+            placeholder="Max"
+            value={filters.maxPrice || ''}
+            onChange={handleChange}
+            className="w-1/2 border border-gray-300 rounded-md px-3 py-2"
+          />
         </div>
       </div>
-    </aside>
+    </div>
   );
 }

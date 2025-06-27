@@ -1,44 +1,49 @@
+// components/Navbar.tsx
 import Link from 'next/link';
-import Image from 'next/image';
-import '../styles/globals.css';
+import { useState } from 'react';
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <nav className="bg-gray-900 text-white p-4 flex justify-between items-center">
-      
-      {/* Sol: Logo + Başlık */}
-      <Link href="/" className="flex items-center space-x-2">
-        <Image src="/logo.png" alt="logo" width={96} height={96} />
-        <span className="text-2xl font-bold">Oyun Kutusu</span>
+    <nav className="bg-gray-900 text-white px-6 py-4 flex items-center justify-between">
+      <Link href="/" className="flex items-center space-x-2 text-2xl font-bold hover:text-yellow-400 transition">
+        <img src="/logo.png" alt="Logo" className="w-8 h-8" />
+        <span>Oyun Kutusu</span>
       </Link>
 
-      {/* Sağ: Menü */}
-      <div className="space-x-4 hidden md:flex">
-        <Link href="/" className="hover:text-yellow-400 transition">
-          Ana Sayfa
-        </Link>
-        <Link href="/about" className="hover:text-yellow-400 transition">
-          Hakkımızda
-        </Link>
-        <Link href="/contact" className="hover:text-yellow-400 transition">
-          İletişim
-        </Link>
+      {/* Masaüstü menü */}
+      <div className="hidden md:flex space-x-8">
+        <Link href="/" className="hover:text-yellow-400 transition">Ana Sayfa</Link>
+        <Link href="/about" className="hover:text-yellow-400 transition">Hakkımızda</Link>
+        <Link href="/contact" className="hover:text-yellow-400 transition">İletişim</Link>
       </div>
 
-      {/* Hamburger Menü (mobil için) */}
-      <button className="md:hidden focus:outline-none">
-        <svg
-          className="w-6 h-6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth={2}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          viewBox="0 0 24 24"
-        >
-          <path d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+      {/* Mobil menü butonu */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="md:hidden focus:outline-none"
+        aria-label="Mobil menüyü aç/kapat"
+      >
+        {menuOpen ? (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        ) : (
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+            <path d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        )}
       </button>
+
+      {/* Mobil menü içerik */}
+      {menuOpen && (
+        <div className="absolute top-full left-0 w-full bg-gray-900 text-white flex flex-col items-center space-y-4 py-4 md:hidden z-50">
+          <Link href="/" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Ana Sayfa</Link>
+          <Link href="/about" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>Hakkımızda</Link>
+          <Link href="/contact" className="hover:text-yellow-400 transition" onClick={() => setMenuOpen(false)}>İletişim</Link>
+        </div>
+      )}
     </nav>
   );
 }
